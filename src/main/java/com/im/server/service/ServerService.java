@@ -2,7 +2,8 @@ package com.im.server.service;
 
 
 import com.im.common.entity.User;
-import com.im.server.message.Message;
+import com.im.server.mapper.ServerMapper;
+import com.im.common.Message;
 
 /**
  * @author 老顾
@@ -11,7 +12,7 @@ import com.im.server.message.Message;
  * @email: 1437594522@qq.com
  * @date 2022/11/1 16:28
  */
-public class ServerDao {
+public class ServerService {
 
     /**
      * 增加用户

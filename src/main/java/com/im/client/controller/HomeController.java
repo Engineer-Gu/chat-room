@@ -1,7 +1,7 @@
-package com.im.client.service;
+package com.im.client.controller;
 
 
-import com.im.client.service.impl.HomeServiceImpl;
+import com.im.client.service.HomeServiceImpl;
 
 /**
  * @author 老顾
@@ -11,7 +11,7 @@ import com.im.client.service.impl.HomeServiceImpl;
  * @email: 1437594522@qq.com
  * @date 2022/11/1 16:44
  */
-public class HomeService {
+public class HomeController {
 
     /**
      * 用户注册

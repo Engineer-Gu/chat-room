@@ -1,8 +1,8 @@
-package com.im.server.service;
+package com.im.server.mapper;
 
 import com.im.common.entity.User;
 import com.im.common.utils.DBUtil;
-import com.im.server.message.Message;
+import com.im.common.Message;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

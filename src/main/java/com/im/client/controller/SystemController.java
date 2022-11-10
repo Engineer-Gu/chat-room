@@ -1,7 +1,7 @@
-package com.im.client.service;
+package com.im.client.controller;
 
 
-import com.im.client.service.impl.SystemServiceImpl;
+import com.im.client.service.SystemServiceImpl;
 
 /**
  * @author 老顾
@@ -10,7 +10,7 @@ import com.im.client.service.impl.SystemServiceImpl;
  * @email: 1437594522@qq.com
  * @date 2022/11/1 16:48
  */
-public class SystemService {
+public class SystemController {
 
     /**
      * 查看在线人员名单

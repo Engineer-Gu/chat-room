@@ -1,4 +1,4 @@
-package com.im.server.message;
+package com.im.common;
 
 import java.io.Serializable;
 

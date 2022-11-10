@@ -1,8 +1,9 @@
-package com.im.client.service.impl;
+package com.im.client.service;
 
 import com.im.client.menu.Menu;
 import com.im.client.menu.MenuManager;
 import com.im.client.message.MessageSender;
+import com.im.client.page.Page;
 import com.im.client.starter.ClientStarter;
 import com.im.common.Command;
 import com.im.common.entity.User;
@@ -21,6 +22,7 @@ import java.util.regex.Pattern;
 public class HomeServiceImpl{
 
     private static final Integer COUNT = 3;
+
     /**
      * 用户注册
      */
@@ -75,7 +77,7 @@ public class HomeServiceImpl{
                 }else if(username.equals(userLoginInfo.getUserName())&&password.equals(userLoginInfo.getPassword())&&email.equals(userLoginInfo.getEmail())){
                     System.out.println("登录成功！进入聊天室主页");
                     homePageMenus = MenuManager.HOME_PAGE_MENUS;
-                    ClientStarter.showInterface(homePageMenus);
+                    Page.showInterface(homePageMenus);
                 }else {
                     System.out.println("用户名|密码|邮箱输入错误！请重新输入");
                 }

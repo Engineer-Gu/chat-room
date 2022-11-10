@@ -1,7 +1,7 @@
 package com.im.client.message;
 
 import com.im.common.utils.SocketUtil;
-import com.im.server.message.Message;
+import com.im.common.Message;
 
 import java.io.IOException;
 import java.net.Socket;

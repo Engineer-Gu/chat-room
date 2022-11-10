@@ -1,8 +1,9 @@
-package com.im.client.service.impl;
+package com.im.client.service;
 
 import com.im.client.menu.Menu;
 import com.im.client.menu.MenuManager;
 import com.im.client.message.MessageSender;
+import com.im.client.page.Page;
 import com.im.client.starter.ClientStarter;
 import com.im.common.Command;
 import com.im.common.entity.User;
@@ -55,7 +56,7 @@ public class SystemServiceImpl {
         if (!msgMatches){
             System.out.println("注销失败，请输入(是/否)进行确认");
             homePageMenus = MenuManager.HOME_PAGE_MENUS;
-            ClientStarter.showInterface(homePageMenus);
+            Page.showInterface(homePageMenus);
         }else {
             User user = MessageSender.sendMsg(Command.CANCELLATION_ACCOUNT,userInfo);
             if (user!=null && IS.equals(msg)){
@@ -64,7 +65,7 @@ public class SystemServiceImpl {
             }else {
                 System.out.println("注销失败");
                 homePageMenus = MenuManager.HOME_PAGE_MENUS;
-                ClientStarter.showInterface(homePageMenus);
+                Page.showInterface(homePageMenus);
             }
         }
     }
@@ -90,11 +91,11 @@ public class SystemServiceImpl {
             if (updatePassword == null){
                 System.out.println("修改密码失败，请稍后重试！");
                 homePageMenus = MenuManager.HOME_PAGE_MENUS;
-                ClientStarter.showInterface(homePageMenus);
+                Page.showInterface(homePageMenus);
             }else if (username.equals(updatePassword.getUserName())){
                 System.out.println("修改密码成功，请重新登录！");
                 homePageMenus = MenuManager.FONT_PAGE_MENUS;
-                ClientStarter.showInterface(homePageMenus);
+                Page.showInterface(homePageMenus);
             }else {
                 System.out.println("修改密码失败，不能修改其他人的密码！");
             }
