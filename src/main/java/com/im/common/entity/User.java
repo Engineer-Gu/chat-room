@@ -1,6 +1,7 @@
 package com.im.common.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author 老顾
@@ -35,9 +36,28 @@ public class User implements Serializable {
 
     /**
      * 新密码
-     * @return
      */
     private String newPassword;
+
+    private String content;
+
+    private String targetUser;
+
+    public String getTargetUser() {
+        return targetUser;
+    }
+
+    public void setTargetUser(String targetUser) {
+        this.targetUser = targetUser;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getUserName() {
         return username;
@@ -79,6 +99,23 @@ public class User implements Serializable {
         this.newPassword = newPassword;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(msg, user.msg) &&
+                Objects.equals(newPassword, user.newPassword);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password, email, msg, newPassword);
+    }
+
     /**
      * 注册
      * @param username
@@ -96,17 +133,15 @@ public class User implements Serializable {
      * @param username
      * @param password
      */
-    public User(String username, String password) {
+    public void login(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public User() {
     }
 
-    public User(String username){
-        this.username = username;
-    }
     /**
      * 查找用户密码
      * @param username
@@ -119,27 +154,24 @@ public class User implements Serializable {
 
     /**
      * 删除用户
-     * @param username
      * @param msg
      */
-    public void deleteUser(String username,String msg){
-        this.username = username;
+    public void deleteUser(String msg){
         this.msg = msg;
     }
 
     /**
      * 修改密码
-     * @param username
+     * @param oldPassword
      * @param newPassword
      */
-    public void updatePassword(String username, String oldPassword, String newPassword) {
-        this.username = username;
+    public void updatePassword(String oldPassword, String newPassword) {
         this.password = oldPassword;
         this.newPassword = newPassword;
     }
 
     @Override
     public String toString() {
-        return "用户名："+username ;
+        return username;
     }
 }

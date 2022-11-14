@@ -1,6 +1,7 @@
 package com.im.server.mapper;
 
 import com.im.common.entity.User;
+import com.im.common.managesocket.ManageServerConnectClientSocket;
 import com.im.common.utils.DBUtil;
 import com.im.common.Message;
 
@@ -60,7 +61,7 @@ public class ServerMapper {
      */
     public static boolean insertUser(Message msg){
         // 获取客户端传来的数据
-        User user = (User) msg.getData();
+        User user = (User) msg.getValue();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int resultSet = 0;
@@ -94,7 +95,7 @@ public class ServerMapper {
      */
     public static User login(Message msg) {
         // 获取客户端传来的数据
-        User user = (User) msg.getData();
+        User user = (User) msg.getValue();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -124,11 +125,10 @@ public class ServerMapper {
 
     /**
      * 删除用户
-     * @param msg
      */
-    public static void deleteUser(Message msg) {
+    public static void deleteUser() {
         // 获取客户端传来的数据
-        User user = (User) msg.getData();
+        String onlineUser = ManageServerConnectClientSocket.getOnlineUser();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int resultSet = 0;
@@ -136,10 +136,10 @@ public class ServerMapper {
             connection = DBUtil.getConnection();
             String sql = "DELETE FROM tb_user WHERE username= ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,user.getUserName());
+            preparedStatement.setString(1, onlineUser);
             resultSet = preparedStatement.executeUpdate();
             if (resultSet == 1){
-                System.out.println("删除成功");
+                System.out.println("删除用户成功，用户【" + onlineUser + "】已删除");
             }
             // 执行SQL语句
         }catch (SQLException e){
@@ -154,7 +154,8 @@ public class ServerMapper {
      */
     public static void updateUserPassword(Message msg) {
         // 获取客户端传来的数据
-        User user = (User) msg.getData();
+        User user = (User) msg.getValue();
+        String onlineUser = ManageServerConnectClientSocket.getOnlineUser();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int resultSet = 0;
@@ -162,8 +163,8 @@ public class ServerMapper {
             connection = DBUtil.getConnection();
             String sql = "UPDATE tb_user SET password = ? WHERE username = ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,user.getNewPassword());
-            preparedStatement.setString(2,user.getUserName());
+            preparedStatement.setString(1, user.getNewPassword());
+            preparedStatement.setString(2, onlineUser);
             resultSet = preparedStatement.executeUpdate();
             if (resultSet == 1){
                 System.out.println("修改密码成功");
@@ -174,5 +175,42 @@ public class ServerMapper {
         }finally {
             DBUtil.close(connection,preparedStatement,null);
         }
+    }
+
+    /**
+     * 查询旧密码是否存在
+     * @param msg
+     * @return
+     */
+    public static User findOnlineUser(Message msg) {
+        // 获取客户端传来的数据
+        User user = (User) msg.getValue();
+        User userInfo = new User();
+        String onlineUser = ManageServerConnectClientSocket.getUser();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DBUtil.getConnection();
+            // 执行SQL语句
+            String sql = "SELECT * FROM tb_user WHERE username = ? AND password = ? ";
+            // 获取查询结果集
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, onlineUser);
+            preparedStatement.setString(2, user.getPassword());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                String userName = resultSet.getString("username");
+                String passWord = resultSet.getString("password");
+                userInfo.setUserName(userName);
+                userInfo.setPassword(passWord);
+                return userInfo;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(connection, preparedStatement, resultSet);
+        }
+        return null;
     }
 }

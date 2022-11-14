@@ -14,6 +14,9 @@ public class InputUtil {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    public static String getLine(){
+       return SCANNER.nextLine();
+    }
     /**
      * 从控制台获取一个给定范围区间内的整数
      *

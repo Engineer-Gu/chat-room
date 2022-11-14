@@ -1,13 +1,14 @@
 package com.im.common;
 
 import java.io.Serializable;
+import java.net.Socket;
 
 /**
  * 消息
  * @author 86153
  * @param <T>
  */
-public class Message<T> implements Serializable {
+public class Message<T,V> implements Serializable {
 
     private static final long serialVersionUID = 3077623444789213960L;
 
@@ -19,23 +20,53 @@ public class Message<T> implements Serializable {
     /**
      * 发送的数据
      */
-    private T data;
+    private T target;
 
-    public Message(int command, T data) {
-        this.command = command;
-        this.data = data;
+    /**
+     * 接受的数据
+     */
+    private V value;
+
+    private Socket socket;
+
+    public Message() {
+
     }
 
     public int getCommand() {
         return command;
     }
 
-    public T getData() {
-        return data;
+    public void setCommand(int command) {
+        this.command = command;
+    }
+
+    public T getTarget() {
+        return target;
+    }
+
+    public void setTarget(T target) {
+        this.target = target;
+    }
+
+    public V getValue() {
+        return value;
+    }
+
+    public void setValue(V value) {
+        this.value = value;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
     }
 
     @Override
     public String toString() {
-        return command + "=>" + data;
+        return "当前输入命令为："+ command + " => " + "由【" + value + "】输入";
     }
 }

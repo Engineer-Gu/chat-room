@@ -1,5 +1,8 @@
 package com.im.common.utils;
 
+import com.im.client.service.SystemService;
+import com.im.common.Message;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -55,6 +58,40 @@ public class SocketUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static <T> T receive(Socket socket){
+        try {
+            //获取输入流
+            InputStream is = socket.getInputStream();
+            //将输入流包装为对象输入流
+            ObjectInputStream ois = new ObjectInputStream(is);
+            //读取对象
+            T t = (T) ois.readObject();
+            //告诉发送端，信息读取已经完毕
+            socket.shutdownInput();
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static <T, V> void send(Socket socket, Message<T,V> msg) {
+        try {
+            //获取输出流
+            OutputStream os = socket.getOutputStream();
+            //将输出流包装为对象输出流
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            //对象输出流写对象，也就是发送消息
+            oos.writeObject(msg);
+            //强制将通道中的数据刷出
+            oos.flush();
+            //告知接收端，消息发送已经完毕
+            socket.shutdownOutput();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

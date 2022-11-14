@@ -43,10 +43,9 @@ public class ServerService {
 
     /**
      * 删除用户
-     * @param msg
      */
-    public static void deleteUser(Message msg){
-        ServerMapper.deleteUser(msg);
+    public static void deleteUser(){
+        ServerMapper.deleteUser();
     }
 
     /**
@@ -55,5 +54,9 @@ public class ServerService {
      */
     public static void updateUserPassword(Message msg){
         ServerMapper.updateUserPassword(msg);
+    }
+
+    public static User findOnlineUser(Message msg) {
+        return ServerMapper.findOnlineUser(msg);
     }
 }
