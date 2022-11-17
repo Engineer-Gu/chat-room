@@ -2,7 +2,7 @@ package com.im.client.page;
 
 import com.im.client.menu.Menu;
 import com.im.client.menu.MenuManager;
-import com.im.client.service.SystemService;
+import com.im.client.service.PageService;
 import com.im.common.message.Command;
 import com.im.common.utils.InputUtil;
 /**
@@ -26,12 +26,16 @@ public class Page {
         switch (select.getCommand()){
             //注册
             case Command.REGISTER:
-                SystemService.registerUser();
+                PageService.registerUser();
                 showInterface(menus);
+                break;
+            //登录
+            case Command.LOGIN:
+                PageService.loginUser();
                 break;
             //找回密码
             case Command.FIND_PASSWORD:
-                SystemService.findPassword();
+                PageService.findPassword();
                 showInterface(menus);
                 break;
             //退出系统
@@ -39,42 +43,61 @@ public class Page {
                 System.out.println("感谢使用本聊天室，欢迎下次再来~");
                 System.exit(0);
                 break;
-            //退出主页
-            case Command.GO_BACK_LOGIN:
-                SystemService.logout();
-                System.out.println("退出登录，跳转到首页");
-                showInterface(MenuManager.FONT_PAGE_MENUS);
-                break;
-            //登录
-            case Command.LOGIN:
-                SystemService.loginUser();
-                break;
             //查看在线人员名单
             case Command.SHOW_ONLINE_USERS_LIST:
-                SystemService.findOnlineUsers();
+                PageService.findOnlineUsers();
                 showInterface(MenuManager.HOME_PAGE_MENUS);
                 break;
             //私聊
             case Command.PRIVATE_CHAT:
-                SystemService.privateChat();
+                PageService.privateChat();
                 showInterface(MenuManager.HOME_PAGE_MENUS);
                 break;
             //群聊
             case Command.PUBLIC_CHAT:
-                SystemService.publicChat();
+                PageService.publicChat();
                 showInterface(MenuManager.HOME_PAGE_MENUS);
                 break;
                 //账号注销
             case Command.CANCELLATION_ACCOUNT:
-                SystemService.cancellationAccount();
+                PageService.cancellationAccount();
                 System.out.println("注销成功，跳转回首页");
                 showInterface(MenuManager.FONT_PAGE_MENUS);
                 break;
             //修改密码
             case Command.UPDATE_PASSWORD:
-                SystemService.updatePassword();
+                PageService.updatePassword();
                 System.out.println("修改密码成功，跳转回首页");
                 showInterface(MenuManager.FONT_PAGE_MENUS);
+                break;
+                //其它功能
+            case Command.OTHER_FUNCTIONS:
+                showInterface(MenuManager.OTHER_FUNCTIONS);
+                break;
+            //退出主页
+            case Command.GO_BACK_LOGIN:
+                PageService.logout();
+                System.out.println("退出登录，跳转到首页");
+                showInterface(MenuManager.FONT_PAGE_MENUS);
+                break;
+                //发送文件
+            case Command.SEND_DIRECTORY:
+                PageService.sendDirectory();
+                showInterface(MenuManager.OTHER_FUNCTIONS);
+                break;
+                //添加好友
+            case Command.ADD_FRIENDS:
+                PageService.addFriends();
+                showInterface(MenuManager.OTHER_FUNCTIONS);
+                break;
+                //离线私聊
+            case Command.LOGOUT_PRIVATE_CHAT:
+                PageService.logoutPrivateChat();
+                showInterface(MenuManager.OTHER_FUNCTIONS);
+                break;
+                //回到主页
+            case Command.GO_BACK_HOME:
+                showInterface(MenuManager.HOME_PAGE_MENUS);
                 break;
         }
     }

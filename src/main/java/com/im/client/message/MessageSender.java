@@ -3,7 +3,6 @@ package com.im.client.message;
 import com.im.common.thread.ReceiveThread;
 import com.im.common.utils.SocketUtil;
 import com.im.common.message.Message;
-
 import java.net.Socket;
 
 /**

@@ -1,7 +1,6 @@
 package com.im.client.menu;
 
 import com.im.common.message.Command;
-
 import java.util.Arrays;
 
 /**
@@ -42,6 +41,17 @@ public class MenuManager {
             new Menu(3, "群聊", Command.PUBLIC_CHAT),
             new Menu(4, "账户注销", Command.CANCELLATION_ACCOUNT),
             new Menu(5, "修改密码", Command.UPDATE_PASSWORD),
-            new Menu(6, "退出", Command.GO_BACK_LOGIN),
+            new Menu(6, "其它功能", Command.OTHER_FUNCTIONS),
+            new Menu(7, "退出", Command.GO_BACK_LOGIN),
+    };
+
+    /**
+     * 其它功能菜单
+     */
+    public static final Menu[] OTHER_FUNCTIONS = {
+            new Menu(1,"发送文件",Command.SEND_DIRECTORY),
+            new Menu(2,"添加好友",Command.ADD_FRIENDS),
+            new Menu(3,"离线私聊",Command.LOGOUT_PRIVATE_CHAT),
+            new Menu(4,"退回主页",Command.GO_BACK_HOME),
     };
 }

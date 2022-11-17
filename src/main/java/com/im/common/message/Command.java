@@ -58,5 +58,28 @@ public interface Command {
      */
     int UPDATE_PASSWORD = 0x10;
 
-    int VIEW = 0x11;
+    /**
+     * 其它功能
+     */
+    int OTHER_FUNCTIONS = 0x11;
+
+    /**
+     * 发送文件
+     */
+    int SEND_DIRECTORY = 0x12;
+
+    /**
+     * 添加好友
+     */
+    int ADD_FRIENDS = 0x13;
+
+    /**
+     * 跳转回主页
+     */
+    int GO_BACK_HOME = 0x14;
+
+    /**
+     * 离线私聊
+     */
+    int LOGOUT_PRIVATE_CHAT = 0x15;
 }

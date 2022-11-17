@@ -1,6 +1,5 @@
 package com.im.client.service;
 
-import com.im.client.menu.Menu;
 import com.im.client.menu.MenuManager;
 import com.im.client.message.MessageSender;
 import com.im.client.page.Page;
@@ -18,13 +17,13 @@ import java.util.regex.Pattern;
  * @email: 1437594522@qq.com
  * @date 2022/11/1 16:49
  */
-public class SystemService{
+public class PageService {
 
     private static final String IS = "是";
 
-    private static final Integer COUNT = 3;
-
     private static User user = new User();
+
+    private static final Integer COUNT = 3;
 
     private  static String userName;
 
@@ -33,8 +32,9 @@ public class SystemService{
     }
 
     public static void setUserName(String userName) {
-        SystemService.userName = userName;
+        PageService.userName = userName;
     }
+
 
     /**
      * 用户注册
@@ -62,30 +62,6 @@ public class SystemService{
             //发送数据给服务端
             MessageSender.sendOn(Command.REGISTER, user);
             System.out.println("注册成功！");
-        }
-    }
-
-    /**
-     * 找回密码
-     */
-    public static void findPassword() {
-        String userName = InputUtil.getInputText("请输入用户名：");
-        String email = InputUtil.getInputText("请输入邮箱：");
-        boolean userNameMatches = Pattern.matches("^[a-zA-Z0-9]{5,20}$", userName);
-        boolean emailMatches = Pattern.matches("[0-9]{5,11}@qq.com", email);
-        user.setUserName(userName);
-        user.setEmail(email);
-        //查询用户是否存在
-        User findUser = ServerService.selectUserName(user);
-        if (!userNameMatches  || !emailMatches) {
-            System.out.println("用户名|邮箱的格式输入错误，请重新输入！");
-        }else {
-            if(findUser == null){
-                System.out.println("用户不存在，请先注册！");
-            }else {
-                System.out.println("您的密码是：");
-                System.out.println(findUser.getPassword());
-            }
         }
     }
 
@@ -120,8 +96,9 @@ public class SystemService{
                         &&password.equals(findUser.getPassword())
                         &&(email.equals(findUser.getEmail()))){
                     System.out.println("登录成功！进入聊天室主页");
-                    //调用发送器，把socket传入子线程
+                    //调用发送器，把socket传入子线程接收数据
                     MessageSender.chatThread();
+                    //跳转回主页
                     Page.showInterface(MenuManager.HOME_PAGE_MENUS);
                 }else {
                     System.out.println("用户名|密码|邮箱输入错误！请重新输入");
@@ -131,6 +108,30 @@ public class SystemService{
             if (count == COUNT) {
                 System.out.println("您输入的次数过多，将退出本聊天室");
                 System.exit(0);
+            }
+        }
+    }
+
+    /**
+     * 找回密码
+     */
+    public static void findPassword() {
+        String userName = InputUtil.getInputText("请输入用户名：");
+        String email = InputUtil.getInputText("请输入邮箱：");
+        boolean userNameMatches = Pattern.matches("^[a-zA-Z0-9]{5,20}$", userName);
+        boolean emailMatches = Pattern.matches("[0-9]{5,11}@qq.com", email);
+        user.setUserName(userName);
+        user.setEmail(email);
+        //查询用户是否存在
+        User findUser = ServerService.selectUserName(user);
+        if (!userNameMatches  || !emailMatches) {
+            System.out.println("用户名|邮箱的格式输入错误，请重新输入！");
+        }else {
+            if(findUser == null){
+                System.out.println("用户不存在，请先注册！");
+            }else {
+                System.out.println("您的密码是：");
+                System.out.println(findUser.getPassword());
             }
         }
     }
@@ -232,5 +233,23 @@ public class SystemService{
     public static void logout() {
         user.setMesType(Command.GO_BACK_LOGIN);
         MessageSender.sendOn(Command.GO_BACK_LOGIN, user);
+    }
+
+    /**
+     * 发送文件
+     */
+    public static void sendDirectory() {
+    }
+
+    /**
+     * 添加好友
+     */
+    public static void addFriends() {
+    }
+
+    /**
+     * 离线私聊
+     */
+    public static void logoutPrivateChat() {
     }
 }

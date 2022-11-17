@@ -2,7 +2,6 @@ package com.im.client.starter;
 
 import com.im.client.menu.MenuManager;
 import com.im.client.page.Page;
-import com.im.client.service.SystemService;
 
 /**
  * @author 老顾
@@ -13,7 +12,7 @@ import com.im.client.service.SystemService;
  */
 public class ClientStarter{
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("欢迎来到只因情聊天室!");
         Page.showInterface(MenuManager.FONT_PAGE_MENUS);
     }

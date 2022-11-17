@@ -27,7 +27,10 @@ public class Message<T,V> implements Serializable {
      */
     private V value;
 
-    private String mesType;//消息类型【在接口定义已知类型】
+    /**
+     * 消息类型
+     */
+    private String mesType;
 
     public String getMesType() {
         return mesType;

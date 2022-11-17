@@ -20,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ServerController implements Runnable {
 
     private static final String YES = "是";
+
     private Socket socket;
 
     User user = new User();
