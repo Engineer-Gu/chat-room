@@ -1,4 +1,4 @@
-package com.im.common;
+package com.im.common.message;
 
 /**
  * @author 顾天伟

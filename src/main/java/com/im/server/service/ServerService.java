@@ -3,7 +3,7 @@ package com.im.server.service;
 
 import com.im.common.entity.User;
 import com.im.server.mapper.ServerMapper;
-import com.im.common.Message;
+import com.im.common.message.Message;
 
 /**
  * @author 老顾
@@ -44,8 +44,8 @@ public class ServerService {
     /**
      * 删除用户
      */
-    public static void deleteUser(){
-        ServerMapper.deleteUser();
+    public static void deleteUser(Message msg){
+        ServerMapper.deleteUser(msg);
     }
 
     /**

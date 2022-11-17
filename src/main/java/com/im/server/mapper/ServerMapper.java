@@ -1,10 +1,8 @@
 package com.im.server.mapper;
 
 import com.im.common.entity.User;
-import com.im.common.managesocket.ManageServerConnectClientSocket;
 import com.im.common.utils.DBUtil;
-import com.im.common.Message;
-
+import com.im.common.message.Message;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +75,7 @@ public class ServerMapper {
             preparedStatement.setString(3,user.getEmail());
             resultSet = preparedStatement.executeUpdate();
             if (resultSet == 1){
-                System.out.println("注册成功");
+                System.out.println("注册成功！");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,9 +124,10 @@ public class ServerMapper {
     /**
      * 删除用户
      */
-    public static void deleteUser() {
+    public static void deleteUser(Message msg) {
         // 获取客户端传来的数据
-        String onlineUser = ManageServerConnectClientSocket.getOnlineUser();
+        User user = (User)msg.getValue();
+        String currentUser = user.getUserName();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int resultSet = 0;
@@ -136,10 +135,10 @@ public class ServerMapper {
             connection = DBUtil.getConnection();
             String sql = "DELETE FROM tb_user WHERE username= ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, onlineUser);
+            preparedStatement.setString(1, currentUser);
             resultSet = preparedStatement.executeUpdate();
             if (resultSet == 1){
-                System.out.println("删除用户成功，用户【" + onlineUser + "】已删除");
+                System.out.println("删除用户成功，用户【" + currentUser + "】已删除");
             }
             // 执行SQL语句
         }catch (SQLException e){
@@ -155,7 +154,7 @@ public class ServerMapper {
     public static void updateUserPassword(Message msg) {
         // 获取客户端传来的数据
         User user = (User) msg.getValue();
-        String onlineUser = ManageServerConnectClientSocket.getOnlineUser();
+        String currentUser = user.getUserName();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int resultSet = 0;
@@ -164,7 +163,7 @@ public class ServerMapper {
             String sql = "UPDATE tb_user SET password = ? WHERE username = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getNewPassword());
-            preparedStatement.setString(2, onlineUser);
+            preparedStatement.setString(2, currentUser);
             resultSet = preparedStatement.executeUpdate();
             if (resultSet == 1){
                 System.out.println("修改密码成功");
@@ -185,8 +184,7 @@ public class ServerMapper {
     public static User findOnlineUser(Message msg) {
         // 获取客户端传来的数据
         User user = (User) msg.getValue();
-        User userInfo = new User();
-        String onlineUser = ManageServerConnectClientSocket.getUser();
+        String onlineUser = user.getUserName();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -202,9 +200,9 @@ public class ServerMapper {
             if (resultSet.next()){
                 String userName = resultSet.getString("username");
                 String passWord = resultSet.getString("password");
-                userInfo.setUserName(userName);
-                userInfo.setPassword(passWord);
-                return userInfo;
+                user.setUserName(userName);
+                user.setPassword(passWord);
+                return user;
             }
         }catch (SQLException e){
             e.printStackTrace();

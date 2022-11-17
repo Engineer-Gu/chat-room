@@ -39,9 +39,28 @@ public class User implements Serializable {
      */
     private String newPassword;
 
+    /**
+     * 输入的内容
+     */
     private String content;
 
+    /**
+     * 目标用户
+     */
     private String targetUser;
+
+    /**
+     * 消息类型
+     */
+    private int mesType;
+
+    public int getMesType() {
+        return mesType;
+    }
+
+    public void setMesType(int mesType) {
+        this.mesType = mesType;
+    }
 
     public String getTargetUser() {
         return targetUser;
@@ -65,6 +84,10 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.username = userName;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -116,58 +139,13 @@ public class User implements Serializable {
         return Objects.hash(username, password, email, msg, newPassword);
     }
 
-    /**
-     * 注册
-     * @param username
-     * @param password
-     * @param email
-     */
     public User(String username, String password,String email) {
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
-    /**
-     * 登录
-     * @param username
-     * @param password
-     */
-    public void login(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
     public User() {
-    }
-
-    /**
-     * 查找用户密码
-     * @param username
-     * @param email
-     */
-    public void findPassword(String username, String email){
-        this.username = username;
-        this.email = email;
-    }
-
-    /**
-     * 删除用户
-     * @param msg
-     */
-    public void deleteUser(String msg){
-        this.msg = msg;
-    }
-
-    /**
-     * 修改密码
-     * @param oldPassword
-     * @param newPassword
-     */
-    public void updatePassword(String oldPassword, String newPassword) {
-        this.password = oldPassword;
-        this.newPassword = newPassword;
     }
 
     @Override

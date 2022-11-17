@@ -36,7 +36,7 @@ public class ServerStarter{
         }
     }
     public static void main(String[] args) {
-        System.out.println("欢迎来到6-308小组开发的聊天室");
+        System.out.println("欢迎来到只因情聊天室！！");
         try {
             //开启监听的端口号
             ServerStarter serverStarter = new ServerStarter(8848);

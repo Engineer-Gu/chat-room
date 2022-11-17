@@ -2,9 +2,8 @@ package com.im.client.page;
 
 import com.im.client.menu.Menu;
 import com.im.client.menu.MenuManager;
-import com.im.client.service.HomeService;
 import com.im.client.service.SystemService;
-import com.im.common.Command;
+import com.im.common.message.Command;
 import com.im.common.utils.InputUtil;
 /**
  * @author 老顾
@@ -20,19 +19,19 @@ public class Page {
      *
      * @param menus
      */
-    public static void showInterface(Menu[] menus) throws Exception {
+    public static void showInterface(Menu[] menus) {
         MenuManager.showMenu(menus);
-        int number = InputUtil.getInputInteger("请选择菜单编号：", 1, menus.length);
+        int number = InputUtil.getInputInteger(1, menus.length);
         Menu select = menus[number-1];
         switch (select.getCommand()){
             //注册
             case Command.REGISTER:
-                HomeService.registerUser();
+                SystemService.registerUser();
                 showInterface(menus);
                 break;
             //找回密码
             case Command.FIND_PASSWORD:
-                HomeService.findPassword();
+                SystemService.findPassword();
                 showInterface(menus);
                 break;
             //退出系统
@@ -44,6 +43,7 @@ public class Page {
             case Command.GO_BACK_LOGIN:
                 SystemService.logout();
                 System.out.println("退出登录，跳转到首页");
+                showInterface(MenuManager.FONT_PAGE_MENUS);
                 break;
             //登录
             case Command.LOGIN:
@@ -67,12 +67,14 @@ public class Page {
                 //账号注销
             case Command.CANCELLATION_ACCOUNT:
                 SystemService.cancellationAccount();
+                System.out.println("注销成功，跳转回首页");
                 showInterface(MenuManager.FONT_PAGE_MENUS);
                 break;
             //修改密码
             case Command.UPDATE_PASSWORD:
                 SystemService.updatePassword();
-                showInterface(menus);
+                System.out.println("修改密码成功，跳转回首页");
+                showInterface(MenuManager.FONT_PAGE_MENUS);
                 break;
         }
     }

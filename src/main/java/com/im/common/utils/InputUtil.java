@@ -20,13 +20,11 @@ public class InputUtil {
     /**
      * 从控制台获取一个给定范围区间内的整数
      *
-     * @param tip
      * @param min
      * @param max
      * @return
      */
-    public static int getInputInteger(String tip, int min, int max){
-        System.out.println(tip);
+    public static int getInputInteger(int min, int max){
         while (true){
             if(SCANNER.hasNextInt()){
                 int number = SCANNER.nextInt();
@@ -75,7 +73,7 @@ public class InputUtil {
      * @return
      */
     public static String getInputText(String tip){
-        System.out.println(tip);
+        System.out.print(tip);
         return SCANNER.next();
     }
 

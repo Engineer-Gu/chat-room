@@ -1,4 +1,4 @@
-package com.im.common;
+package com.im.common.message;
 
 import java.io.Serializable;
 import java.net.Socket;
@@ -27,7 +27,15 @@ public class Message<T,V> implements Serializable {
      */
     private V value;
 
-    private Socket socket;
+    private String mesType;//消息类型【在接口定义已知类型】
+
+    public String getMesType() {
+        return mesType;
+    }
+
+    public void setMesType(String mesType) {
+        this.mesType = mesType;
+    }
 
     public Message() {
 
@@ -55,14 +63,6 @@ public class Message<T,V> implements Serializable {
 
     public void setValue(V value) {
         this.value = value;
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
-
-    public void setSocket(Socket socket) {
-        this.socket = socket;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.im.client.menu;
 
-import com.im.common.Command;
+import com.im.common.message.Command;
 
 import java.util.Arrays;
 
@@ -18,9 +18,9 @@ public class MenuManager {
      * @param menus
      */
     public static void showMenu(Menu[] menus){
-        System.out.println("==========================");
+        System.out.println("===========================");
         Arrays.stream(menus).forEach(System.out::println);
-        System.out.println("=============================");
+        System.out.println("===========================");
     }
 
     /**
