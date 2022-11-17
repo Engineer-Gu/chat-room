@@ -239,6 +239,11 @@ public class PageService {
      * 发送文件
      */
     public static void sendDirectory() {
+        String targetUserName = InputUtil.getInputText("请输入你想把文件发送给的目标用户：");
+        String path = InputUtil.getInputText("请输入要发送文件的路径：【格式：D:\\xx.jpg】");
+        String targetPath = InputUtil.getInputText("请输入对方接收该文件的路径：【格式：D:\\xx.jpg】");
+        boolean userNameMatches = Pattern.matches("^[a-zA-Z0-9]{5,20}$", targetUserName);
+
     }
 
     /**
