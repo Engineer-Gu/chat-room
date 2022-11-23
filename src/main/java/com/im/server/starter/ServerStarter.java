@@ -39,7 +39,7 @@ public class ServerStarter{
         System.out.println("欢迎来到只因情聊天室！！");
         try {
             //开启监听的端口号
-            ServerStarter serverStarter = new ServerStarter(8848);
+            ServerStarter serverStarter = new ServerStarter(9090);
             //调用方法，启动一个线程处理与该客户端交互
             serverStarter.start();
         }catch (Exception e){

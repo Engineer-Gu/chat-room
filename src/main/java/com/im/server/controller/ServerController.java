@@ -69,6 +69,10 @@ public class ServerController implements Runnable {
                 case Command.GO_BACK_LOGIN:
                     processLogout(msg);
                     break;
+                    //发送文件
+                case Command.SEND_DIRECTORY:
+                    processSendDirectory(msg);
+                    break;
             }
         }
 
@@ -206,5 +210,12 @@ public class ServerController implements Runnable {
             onlineUserList.append(iterator.next()).append(" ");
         }
         return onlineUserList.toString();
+    }
+
+    /**
+     * 处理发送文件
+     * @param msg
+     */
+    private void processSendDirectory(Message msg) {
     }
 }

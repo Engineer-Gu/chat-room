@@ -54,6 +54,32 @@ public class User implements Serializable {
      */
     private int mesType;
 
+    /**
+     * 原始路径
+     */
+    private String path;
+
+    /**
+     * 目标地址
+     */
+    private String targetPath;
+
+    public String getTargetPath() {
+        return targetPath;
+    }
+
+    public void setTargetPath(String targetPath) {
+        this.targetPath = targetPath;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public int getMesType() {
         return mesType;
     }

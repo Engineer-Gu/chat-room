@@ -19,7 +19,7 @@ public class MessageSender {
 
     static {
         try {
-            socket = new Socket("127.0.0.1", 8848);
+            socket = new Socket("127.0.0.1", 9090);
         }catch (Exception e){
             e.printStackTrace();
         }
